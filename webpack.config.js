@@ -24,11 +24,11 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
             },
             {
                 test: /\.less$/,
-                loader: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'], 
+                loader: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader'], 
             },
         ],
     },

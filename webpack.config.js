@@ -3,6 +3,8 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 抽离 css文件的 webpack插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// 不需要编译的文件 直接拷贝过来 如 src下的static文件夹下的文件
+const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
     entry: './src/main.js',
     output: {
@@ -18,7 +20,17 @@ module.exports = {
             filename: 'css/[name].[chunkHash:8].css',
             chunkFilename: '[id].css',
             ignoreOrder: false, // Enable to remove warnings about conflicting order
-        })
+        }),
+        new CopyPlugin([
+            { 
+                from: path.resolve(process.cwd(), 'src/static'),
+                to: 'static'
+                /* 
+                * path.resolve(决心 决意)   // 把一个路径或路径片段的序列解析为一个绝对路径
+                * process.cwd() // 取当前工作目录（Current[现在的 最流行的] Work Directory）
+                */
+            }
+        ]),
     ],
     module: {
         rules: [

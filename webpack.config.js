@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 抽离 css文件的 webpack插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
-    mode: "production",
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -25,5 +24,11 @@ module.exports = {
             use: [MiniCssExtractPlugin.loader, 'css-loader'],
           },
         ],
+    },
+    devServer: {
+      // 配置端口号为 3000
+      port: 3000,
+      // 构建成功后自动打开 localhost:3000
+      open: true
     }
 }

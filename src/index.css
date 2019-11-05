@@ -1,6 +1,6 @@
 body {
     background-color: pink;
-    display: flex;
+    background: url(./assets/01.jpg)
 }
 ::placeholder {
     color: blue;

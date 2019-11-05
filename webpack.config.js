@@ -30,6 +30,19 @@ module.exports = {
                 test: /\.less$/,
                 loader: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader'], 
             },
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 512, // 当图片小于此时(byte) 转为 base64 
+                            name: 'images/[name].[ext]', // 设置打包后图片的路径 
+                            publicPath: '/'  // 设置公共路径 为 服务器根目录
+                        },
+                    },
+                ],
+            },
         ],
     },
     devServer: {

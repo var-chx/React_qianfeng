@@ -1,11 +1,11 @@
 const path = require('path')
 //自动生成 html的webpack 插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 抽离 css文件的 webpack插件
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 不需要编译的文件 直接拷贝过来 如 src下的static文件夹下的文件
 const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
+    // mode: "production",
+    mode: 'development',
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -15,11 +15,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'webpack',
             template: 'public/index.html'
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].[chunkHash:8].css',
-            chunkFilename: '[id].css',
-            ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
         new CopyPlugin([
             { 
@@ -36,11 +31,11 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.less$/,
-                loader: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader'], 
+                loader: ['style-loader', 'css-loader', 'less-loader'], 
             },
             {
                 test: /\.(png|jpg|gif)$/i,
